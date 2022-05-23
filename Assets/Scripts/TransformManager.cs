@@ -14,11 +14,13 @@ public class TransformManager : MonoBehaviour
 
     public bool isRotated;
     public bool isScaled;
+    public bool isBoth;
 
     void Start()
     {
         isRotated = false;
         isScaled = false;
+        isBoth = false;
         OriginalRotation = myCube.transform.eulerAngles;
         OriginalScale = myCube.transform.localScale;
     }
@@ -50,6 +52,21 @@ public class TransformManager : MonoBehaviour
             {
                 myCube.transform.localScale = escalado.transform.localScale;
                 isScaled = true;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (isBoth)
+            {
+                myCube.transform.eulerAngles = OriginalRotation;
+                myCube.transform.localScale = OriginalScale;
+                isBoth = false;
+            }
+            else
+            {
+                myCube.transform.eulerAngles = rotadoyescalado.transform.eulerAngles;
+                myCube.transform.localScale = rotadoyescalado.transform.localScale;
+                isBoth = true;
             }
         }
     }
